@@ -1,1 +1,11 @@
 #weibo
+本简易微博分成两大部分：前端部分和服务器部分
+前端部分：包含三个文件夹
+html：存放html页面
+css：存放css相关文件
+js：存放js文件
+服务器部分：包含四个js文件
+index.js：服务器主页
+services.js：服务器处理文件
+router.js：路由处理文件
+requestHandlers.js：请求处理文件
