@@ -1,0 +1,70 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: -webkit-linear-gradient(top, #fff, #d6dbdd);
+    background: -o-linear-gradient(top, #fff, #d6dbdd);
+    background: linear-gradient(top, #fff, #d6dbdd);
+}
+
+.header {
+    box-shadow: 0 1px 1px #c6c6c6;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    text-align: center;
+    margin: 0;
+}
+
+.main {
+    text-align: center;
+}
+
+.panel {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #c6c6c6;
+}
+
+.panel-title {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 1px 1px #c6c6c6;
+}
+
+.log-panel form {
+    padding: 10px 20px;
+}
+
+.form-item {
+    margin-bottom: 10px;
+}
+
+.form-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.form-button {
+    border: 1px solid #cdcdcd;
+    box-shadow: 0 0 1px #ccc;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 15px;
+}
+
+.login-button {
+    margin-right: 10px;
+}

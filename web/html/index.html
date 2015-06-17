@@ -8,7 +8,30 @@
 </head>
 
 <body>
-	<div class="header">我的简易微博</div>
+    <div class="header">
+        <h1>我的简易微博</h1>
+    </div>
+    <div class="main">
+        <div class="panel log-panel">
+            <h2 class="panel-title">
+                用户登录
+            </h2>
+            <form action="/login" method="post">
+                <p class="form-item">
+                    <span class="form-item-info">账号:</span>
+                    <input class="form-input" type="text" placeholder="请输入用户名"></input>
+                </p>
+                <p class="form-item">
+                    <span class="form-item-info">密码:</span>
+                    <input class="form-input" type="password" placeholder="请输入密码"></input>
+                </p>
+                <p class="form-item">
+                    <input class="form-button login-button" type="submit" value="登录"></input>
+                    <input class="form-button" type="submit" value="注册"></input>
+                </p>
+            </form>
+        </div>
+    </div>
     <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
