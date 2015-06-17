@@ -16,18 +16,18 @@
             <h2 class="panel-title">
                 用户登录
             </h2>
-            <form action="/login" method="post">
+            <form action="/login" method="post" class="login-form">
                 <p class="form-item">
                     <span class="form-item-info">账号:</span>
-                    <input class="form-input" type="text" placeholder="请输入用户名"></input>
+                    <input class="form-input login-input" type="text" placeholder="请输入用户名" name="username">
                 </p>
                 <p class="form-item">
                     <span class="form-item-info">密码:</span>
-                    <input class="form-input" type="password" placeholder="请输入密码"></input>
+                    <input class="form-input login-input" type="password" placeholder="请输入密码" name="password">
                 </p>
                 <p class="form-item">
-                    <input class="form-button login-button" type="submit" value="登录"></input>
-                    <input class="form-button" type="submit" value="注册"></input>
+                    <input class="form-button login-confirm" type="submit" value="登录" name="login">
+                    <input class="form-button" type="submit" value="注册" name="register">
                 </p>
             </form>
         </div>
