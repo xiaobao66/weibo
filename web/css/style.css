@@ -150,6 +150,11 @@ body {
     font-weight: bold;
 }
 
+.weibo-content {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
 .weibo-delete {
     text-align: right;
 }
@@ -157,6 +162,7 @@ body {
 .delete-button {
     color: #000;
     text-decoration: none;
+    box-shadow: none;
 }
 
 .bottom {
