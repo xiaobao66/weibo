@@ -16,10 +16,12 @@ function start(router, handler) {
             var form = new formidable.IncomingForm();
             form.encoding = 'utf-8';
             form.parse(request, function(err, fields, files) {
-                router(handler,pathname,response,fields);
+                router(handler, pathname, response, fields);
             });
         } else {
-            router(handler, pathname, response);
+            getData = pathname.split('/');
+            getData = getData[getData.length - 1];
+            router(handler, pathname, response,getData);
         }
     }
     http.createServer(onRequest).listen(8888);

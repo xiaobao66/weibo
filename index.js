@@ -8,5 +8,6 @@ handler['/js'] = requestHandlers.loadFile;
 handler['/html'] = requestHandlers.loadFile;
 handler['/login'] = requestHandlers.login;
 handler['/register'] = requestHandlers.register;
+handler['/user'] = requestHandlers.weibo;
 
 server.start(router.router, handler);

@@ -137,6 +137,51 @@ function register(response, fileType, pathname, postData) {
     });
 }
 
+function weibo(response, fileType, pathname, getData) {
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        port: '3306',
+        user: 'root',
+        password: 'root',
+        database: 'weibo'
+    });
+    connection.connect();
+    var sql = "select * from user where username='" + getData + "'";
+    var username = getData;
+    connection.query(sql, function(err, results, fields) {
+        if (err) {
+            return;
+        } else {
+            getData = results[0].id;
+            sql = "select * from weibo where userid='" + getData + "'";
+            connection.query(sql, function(err, results, fields) {
+                if (err) {
+                    return;
+                } else if (results.length == 0) {
+                    response.writeHead(200, {
+                        'Content-type': 'application/json'
+                    });
+                    response.write('no article');
+                    response.end();
+                } else {
+                    var returnInfo = {};
+                    for (var i = 0; i < results.length; i++) {
+                        returnInfo[i] = {};
+                        returnInfo[i]['id'] = results[i]['id'];
+                        returnInfo[i]['article'] = results[i]['article'];
+                    }
+                    response.writeHead(200, {
+                        'Content-type': 'application/json'
+                    });
+                    response.write(JSON.stringify(returnInfo));
+                    response.end();
+                }
+            });
+        }
+    });
+}
+
 exports.loadFile = loadFile;
 exports.login = login;
 exports.register = register;
+exports.weibo = weibo;

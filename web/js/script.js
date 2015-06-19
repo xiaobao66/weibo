@@ -1,6 +1,9 @@
 window.addEventListener('load', function() {
     var formId = document.getElementsByTagName('form')[0].id;
     loadForm(formId);
+    if (document.getElementById('weibo-panel') != null) {
+        loadWeibo();
+    }
 });
 
 function loadForm(formId) {
@@ -57,7 +60,8 @@ function sendData(form, url) {
                     window.location.href = '/register.html';
                     break;
                 case 'login':
-                    window.location.href = '/weibo.html';
+                    var username = document.getElementById('username').value;
+                    window.location.href = '/weibo.html?' + username;
                     break;
                 case 'no user':
                     var logInfo = document.getElementById('log-info');
@@ -84,10 +88,51 @@ function sendData(form, url) {
                     }, 2500);
                     break;
                 case 'insert success':
-                    window.location.href = '/weibo.html';
+                    var username = document.getElementById('username').value;
+                    window.location.href = '/weibo.html?' + username;
             }
         }
     }
     xmlhttp.open("POST", url);
     xmlhttp.send(fd);
+}
+
+function loadWeibo() {
+    var nowUrl = window.location.href;
+    var url = '/user/';
+    url += nowUrl.split('?')[1];
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            switch (xmlhttp.responseText) {
+                case 'no article':
+                    break;
+                default:
+                    var obj = eval("(" + xmlhttp.responseText + ")");
+                    for (var i in obj) {
+                        var newDiv = document.createElement('div');
+                        newDiv.className = 'weibo-show panel';
+                        var newSpan = document.createElement('span');
+                        newSpan.className = 'weibo-username';
+                        newSpan.innerHTML = nowUrl.split('?')[1];
+                        newDiv.appendChild(newSpan);
+                        var newPara = document.createElement('p');
+                        newPara.className = 'weibo-content';
+                        newPara.innerHTML = obj[i].article;
+                        newDiv.appendChild(newPara);
+                        var newPara2 = document.createElement('p');
+                        newPara2.className = 'weibo-delete';
+                        var newA = document.createElement('a');
+                        newA.href = 'javascript:void(0)';
+                        newA.className = 'form-button delete-button';
+                        newA.innerHTML = '删除';
+                        newPara2.appendChild(newA);
+                        newDiv.appendChild(newPara2);
+                        document.getElementById('weibo-panel').appendChild(newDiv);
+                    }
+            }
+        }
+    }
+    xmlhttp.open("GET", url);
+    xmlhttp.send();
 }

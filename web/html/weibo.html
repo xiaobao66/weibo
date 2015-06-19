@@ -11,7 +11,7 @@
     <div class="header">
         <h1>简易微博</h1>
     </div>
-    <div class="weibo-panel">
+    <div class="weibo-panel" id="weibo-panel">
         <div class="panel">
             <h2 class="panel-title">
 				我的微博
@@ -25,7 +25,7 @@
                         </span>
                     </div>
                 </div>
-                <form action="/submit" method="post" class="edit-form">
+                <form action="/submit" method="post" class="edit-form" id="edit-form">
                     <textarea name="weibo" class="edit-textarea"></textarea>
                     <p class="edit-button">
                         <input type="submit" name="edit" value="发布" class="form-button edit-confirm">
@@ -33,24 +33,6 @@
                     </p>
                 </form>
             </div>
-        </div>
-        <div class="weibo-show panel">
-            <span class="weibo-username">xiaobao</span>
-            <p class="weibo-content">
-                【记者们在为小米或者乐视洗地的时候矜持点，吃相别太难看了】发布“小米公关记者群发红包求转乐视负面”后，群主证券日报记者陈妍妍和前中国企业家记者邹玲发公号攻击蓝鲸，起诉云云。说明：1、你那破群蓝鲸根本不屑一进，截图是其他看不惯的记者发来。2、别把记者脸丢光了。在企业前装装矜持也不难吧
-            </p>
-            <p class="weibo-delete">
-                <a href="javascript:void(0)" class="form-button delete-button">删除</a>
-            </p>
-        </div>
-        <div class="weibo-show panel">
-            <span class="weibo-username">xiaobao</span>
-            <p class="weibo-content">
-                【记者们在为小米或者乐视洗地的时候矜持点，吃相别太难看了】发布“小米公关记者群发红包求转乐视负面”后，群主证券日报记者陈妍妍和前中国企业家记者邹玲发公号攻击蓝鲸，起诉云云。说明：1、你那破群蓝鲸根本不屑一进，截图是其他看不惯的记者发来。2、别把记者脸丢光了。在企业前装装矜持也不难吧
-            </p>
-            <p class="weibo-delete">
-                <a href="javascript:void(0)" class="form-button delete-button">删除</a>
-            </p>
         </div>
     </div>
     <div class="bottom">
