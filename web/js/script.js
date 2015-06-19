@@ -35,7 +35,7 @@ function loadForm(formId) {
                     }
                 }
                 if (flag) {
-                    sendData(form, '/register', userInfo);
+                    sendData(form, '/register');
                 }
         }
     });
@@ -75,9 +75,16 @@ function sendData(form, url) {
                         logInfo.className = 'log-info';
                     }, 2500);
                     break;
-                case 'cancel':
-                    window.location.href = '/';
+                case 'user exist':
+                    var registerInfo = document.getElementById('register-info');
+                    registerInfo.innerHTML = '用户已存在';
+                    registerInfo.className = 'log-info log-info-change';
+                    window.setTimeout(function() {
+                        registerInfo.className = 'log-info';
+                    }, 2500);
                     break;
+                case 'insert success':
+                    window.location.href = '/weibo.html';
             }
         }
     }

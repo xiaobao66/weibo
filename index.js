@@ -7,5 +7,6 @@ handler['/css'] = requestHandlers.loadFile;
 handler['/js'] = requestHandlers.loadFile;
 handler['/html'] = requestHandlers.loadFile;
 handler['/login'] = requestHandlers.login;
+handler['/register'] = requestHandlers.register;
 
 server.start(router.router, handler);

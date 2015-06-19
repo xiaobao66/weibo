@@ -65,7 +65,7 @@ function login(response, fileType, pathname, postData) {
                 response.writeHead(200, {
                     'Content-type': 'text/plain'
                 });
-                response.write('error.');
+                response.write('error');
                 response.end();
             } else if (results.length == 0) {
                 response.writeHead(200, {
@@ -94,10 +94,11 @@ function login(response, fileType, pathname, postData) {
         });
         response.write('register');
         response.end();
+        connection.end();
     }
 }
 
-function register(response, fileType, pathname, postData){
+function register(response, fileType, pathname, postData) {
     var connection = mysql.createConnection({
         host: 'localhost',
         port: '3306',
@@ -106,22 +107,36 @@ function register(response, fileType, pathname, postData){
         database: 'weibo'
     });
     connection.connect();
-    if ('register' in postData) {
-        if(postData.username==''||postData.wholename==''||postData.password==''){
-            response.writeHead(200,{
-                'Content-type':'text/plain'
+    var sql = "select * from user where username='" + postData.username + "'";
+    connection.query(sql, function(err, results, fields) {
+        if (results.length == 0) {
+            sql = "insert into user (username,name,sex,password) values('" + postData.username + "','" + postData.wholename + "','" + postData.sex + "','" + postData.password + "')";
+            connection.query(sql, function(err, results, fields) {
+                if (err) {
+                    response.writeHead(200, {
+                        'Content-type': 'text/plain'
+                    });
+                    response.write('error');
+                    response.end();
+                } else {
+                    response.writeHead(200, {
+                        'Content-type': 'text/plain'
+                    });
+                    response.write('insert success');
+                    response.end();
+                }
             });
-            response.write('empty');
+        } else {
+            response.writeHead(200, {
+                'Content-type': 'text/plain'
+            });
+            response.write('user exist');
             response.end();
         }
-    } else if ('cancel' in postData) {
-        response.writeHead(200, {
-            'Content-type': 'text/plain'
-        });
-        response.write('cancel');
-        response.end();
-    }
+        connection.end();
+    });
 }
 
 exports.loadFile = loadFile;
 exports.login = login;
+exports.register = register;
