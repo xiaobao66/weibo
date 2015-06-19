@@ -11,15 +11,17 @@
     <div class="header">
         <h1>简易微博</h1>
     </div>
+    <div class="log-info" id="log-info">提示信息</div>
     <div class="main">
         <div class="panel register-panel">
             <h2 class="panel-title">
 				欢迎加入我的简易微博
 			</h2>
-            <form action="/register" method="post" class="register-form">
+            <form id="register-form" class="register-form">
                 <p class="form-item">
                     <p class="form-item-info">全名:</p>
-                    <input type="text" name="wholename" placeholder="请输入您的全名" class="form-input register-input">
+                    <input type="text" name="wholename" placeholder="请输入您的全名" class="form-input register-input" id="wholename">
+                    <p class="form-register-info" id="form-wholename"></p>
                 </p>
                 <p class="form-item">
                     <p class="form-item-info">性别:</p>
@@ -30,15 +32,17 @@
                 </p>
                 <p class="form-item">
                     <p class="form-item-info">用户名:</p>
-                    <input type="text" name="username" placeholder="请输入您的用户名" class="form-input register-input">
+                    <input type="text" name="username" placeholder="请输入您的用户名" class="form-input register-input" id="username">
+                    <p class="form-register-info" id="form-username"></p>
                 </p>
                 <p class="form-item">
                     <p class="form-item-info">密码:</p>
-                    <input type="text" name="password" placeholder="请输入您的密码" class="form-input register-input">
+                    <input type="text" name="password" placeholder="请输入您的密码" class="form-input register-input" id="password">
+                    <p class="form-register-info" id="form-password"></p>
                 </p>
                 <p class="form-item register-button">
                     <input type="submit" name="register" value="确定" class="form-button register-confirm">
-                    <input type="submit" name="cancel" value="取消" class="form-button">
+                    <input type="reset" name="cancel" value="取消" class="form-button">
                 </p>
             </form>
         </div>

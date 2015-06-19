@@ -63,21 +63,21 @@ function login(response, fileType, pathname, postData) {
         connection.query(sql, function(err, results, fields) {
             if (err) {
                 response.writeHead(200, {
-                    'Content-type': 'text/plain;charset="utf-8"'
+                    'Content-type': 'text/plain'
                 });
                 response.write('error.');
                 response.end();
             } else if (results.length == 0) {
                 response.writeHead(200, {
-                    'Content-type': 'text/plain;charset="utf-8"'
+                    'Content-type': 'text/plain'
                 });
-                response.write('no user.');
+                response.write('no user');
                 response.end();
             } else if (results[0].password != postData.password) {
                 response.writeHead(200, {
-                    'Content-type': 'text/plain;charset="utf-8"'
+                    'Content-type': 'text/plain'
                 });
-                response.write('password error.');
+                response.write('password error');
                 response.end();
             } else {
                 response.writeHead(200, {
@@ -93,6 +93,32 @@ function login(response, fileType, pathname, postData) {
             'Content-type': 'text/plain'
         });
         response.write('register');
+        response.end();
+    }
+}
+
+function register(response, fileType, pathname, postData){
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        port: '3306',
+        user: 'root',
+        password: 'root',
+        database: 'weibo'
+    });
+    connection.connect();
+    if ('register' in postData) {
+        if(postData.username==''||postData.wholename==''||postData.password==''){
+            response.writeHead(200,{
+                'Content-type':'text/plain'
+            });
+            response.write('empty');
+            response.end();
+        }
+    } else if ('cancel' in postData) {
+        response.writeHead(200, {
+            'Content-type': 'text/plain'
+        });
+        response.write('cancel');
         response.end();
     }
 }
