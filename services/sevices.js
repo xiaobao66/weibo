@@ -1,5 +1,6 @@
 var http = require('http');
 var url = require('url');
+var formidable = require('formidable');
 
 function start(router, handler) {
     function onRequest(request, response) {
@@ -11,13 +12,15 @@ function start(router, handler) {
             return;
         }
         //接收post传递过来的数据
-        request.setEncoding('utf8');
-        request.addListener('data', function(postDataChunk) {
-            postData += postDataChunk;
-        });
-        request.addListener('end', function() {
-            router(handler, pathname, response, postData);
-        });
+        if (request.method.toLowerCase() == 'post') {
+            var form = new formidable.IncomingForm();
+            form.encoding = 'utf-8';
+            form.parse(request, function(err, fields, files) {
+                router(handler,pathname,response,fields);
+            });
+        } else {
+            router(handler, pathname, response);
+        }
     }
     http.createServer(onRequest).listen(8888);
     console.log('Server has started.');

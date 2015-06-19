@@ -5,6 +5,7 @@ var handler = {};
 handler['/'] = requestHandlers.loadFile;
 handler['/css'] = requestHandlers.loadFile;
 handler['/js'] = requestHandlers.loadFile;
+handler['/html'] = requestHandlers.loadFile;
 handler['/login'] = requestHandlers.login;
 
 server.start(router.router, handler);

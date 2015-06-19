@@ -4,23 +4,30 @@ var mysql = require('mysql');
 
 function loadFile(response, fileType, pathname) {
     switch (fileType) {
-        case '/css':
-        case '/js':
-            fs.readFile("." + pathname, "utf-8", function(err, data) {
+        case 'css':
+            fs.readFile("./web/css/" + pathname, "utf-8", function(err, data) {
                 //读取文件内容
                 if (err) throw err;
                 response.writeHead(200, {
-                    'Content-type': {
-                        '/css': 'text/css',
-                        '/js': 'application/javascript'
-                    }[fileType]
+                    'Content-type': 'text/css'
                 });
                 response.write(data);
                 response.end();
             });
             break;
-        case '/':
-            fs.readFile("./web/html/index.html", "utf-8", function(err, data) {
+        case 'js':
+            fs.readFile("./web/js/" + pathname, "utf-8", function(err, data) {
+                //读取文件内容
+                if (err) throw err;
+                response.writeHead(200, {
+                    'Content-type': 'application/javascript'
+                });
+                response.write(data);
+                response.end();
+            });
+            break;
+        case 'html':
+            fs.readFile("./web/html/" + pathname, "utf-8", function(err, data) {
                 if (err) throw err;
                 response.writeHead(200, {
                     'Content-type': 'text/html;charset="utf-8"'
@@ -30,7 +37,7 @@ function loadFile(response, fileType, pathname) {
             });
             break;
         default:
-            fs.readFile("." + pathname, "utf-8", function(err, data) {
+            fs.readFile("./web/html/index.html", "utf-8", function(err, data) {
                 if (err) throw err;
                 response.writeHead(200, {
                     'Content-type': 'text/html;charset="utf-8"'
@@ -42,7 +49,6 @@ function loadFile(response, fileType, pathname) {
 }
 
 function login(response, fileType, pathname, postData) {
-    postData = querystring.parse(postData);
     var connection = mysql.createConnection({
         host: 'localhost',
         port: '3306',
@@ -74,27 +80,20 @@ function login(response, fileType, pathname, postData) {
                 response.write('password error.');
                 response.end();
             } else {
-                fs.readFile("./web/html/weibo.html", "utf-8", function(err, data) {
-                    if (err) throw err;
-                    response.writeHead(200, {
-                        'Content-type': 'text/html;charset="utf-8"'
-                    });
-                    response.write(data);
-                    response.end();
+                response.writeHead(200, {
+                    'Content-type': 'text/plain'
                 });
+                response.write('login');
+                response.end();
             }
         });
         connection.end();
-    }
-    if ('register' in postData) {
-        fs.readFile("./web/html/register.html", "utf-8", function(err, data) {
-            if (err) throw err;
-            response.writeHead(200, {
-                'Content-type': 'text/html;charset="utf-8"'
-            });
-            response.write(data);
-            response.end();
+    } else if ('register' in postData) {
+        response.writeHead(200, {
+            'Content-type': 'text/plain'
         });
+        response.write('register');
+        response.end();
     }
 }
 
