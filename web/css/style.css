@@ -168,6 +168,14 @@ body {
     margin-top: 20px;
     padding: 10px 20px;
     background: #eef0f1;
+    opacity: 1;
+    -webkit-transition: opacity 2s ease;
+    -o-transition: opacity 2s ease;
+    transition: opacity 2s ease;
+}
+
+.weibo-disappear {
+    opacity: 0;
 }
 
 .weibo-username {

@@ -99,7 +99,7 @@ function sendData(form, url) {
 
 function loadWeibo() {
     var nowUrl = window.location.href;
-    var url = '/user/';
+    var url = '/user?username=';
     url += nowUrl.split('?')[1];
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -125,9 +125,24 @@ function loadWeibo() {
                         var newA = document.createElement('a');
                         newA.href = 'javascript:void(0)';
                         newA.className = 'form-button delete-button';
+                        newA.id = obj[i].id;
                         newA.innerHTML = '删除';
                         newPara2.appendChild(newA);
                         newDiv.appendChild(newPara2);
+                        newDiv.addEventListener('click', function(event) {
+                            if (event.target.innerHTML == '删除') {
+                                var deleteObj = event.currentTarget;
+                                event.currentTarget.className = 'weibo-show panel weibo-disappear';
+                                setTimeout(function() {
+                                    deleteObj.parentNode.removeChild(deleteObj);
+                                }, 1500);
+                                var xmlhttp = new XMLHttpRequest();
+                                var url2 = '/delete?id=' + event.target.id;
+                                xmlhttp.open("GET", url2);
+                                xmlhttp.send();
+                            }
+
+                        });
                         document.getElementById('weibo-panel').appendChild(newDiv);
                     }
             }

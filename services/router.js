@@ -16,9 +16,6 @@ function router(handler, pathname, response, postData) {
         default:
             handlerPath = pathname;
     }
-    if(strSplit[1]=='user'){
-    	handlerPath = '/user';
-    }
     if (typeof(handler[handlerPath]) === 'function') {
         handler[handlerPath](response, fileType, pathname, postData);
     } else {

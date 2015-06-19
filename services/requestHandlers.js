@@ -146,7 +146,7 @@ function weibo(response, fileType, pathname, getData) {
         database: 'weibo'
     });
     connection.connect();
-    var sql = "select * from user where username='" + getData + "'";
+    var sql = "select * from user where username='" + getData['username'] + "'";
     var username = getData;
     connection.query(sql, function(err, results, fields) {
         if (err) {
@@ -181,7 +181,36 @@ function weibo(response, fileType, pathname, getData) {
     });
 }
 
+function deleteWeibo(response, fileType, pathname, getData) {
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        port: '3306',
+        user: 'root',
+        password: 'root',
+        database: 'weibo'
+    });
+    connection.connect();
+    var sql = "delete from weibo where id = " + getData['id'];
+    connection.query(sql, function(err, results, fields) {
+        if (err) {
+            response.writeHead(200, {
+                'Content-type': 'text/plain'
+            });
+            response.write('error');
+            response.end();
+        } else {
+            response.writeHead(200, {
+                'Content-type': 'text/plain'
+            });
+            response.write('delete success');
+            response.end();
+        }
+    });
+
+}
+
 exports.loadFile = loadFile;
 exports.login = login;
 exports.register = register;
 exports.weibo = weibo;
+exports.deleteWeibo = deleteWeibo;
