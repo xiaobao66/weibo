@@ -19,17 +19,17 @@
             <div class="weibo-edit">
                 <div class="edit-title">
                     <span class="weibo-info">有什么新鲜的事?</span>
-                    <div class="edit-count">
-                        <span>还可以输入
-                        <span class="edit-number">140</span> 字
-                        </span>
+                    <div class="edit-count" id="edit-count">
+                        <span class="edit-number-info" id="edit-number-info">还可以输入</span>
+                        <span class="edit-number" id="edit-number">140</span>
+                        <span>字</span>
                     </div>
                 </div>
                 <form action="/submit" method="post" class="edit-form" id="edit-form">
-                    <textarea name="weibo" class="edit-textarea"></textarea>
+                    <textarea name="weibo" class="edit-textarea" id="edit-textarea"></textarea>
                     <p class="edit-button">
                         <input type="submit" name="edit" value="发布" class="form-button edit-confirm">
-                        <input type="reset" value="取消" class="form-button">
+                        <input type="reset" value="取消" class="form-button" id="edit-reset">
                     </p>
                 </form>
             </div>

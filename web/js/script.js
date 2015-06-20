@@ -3,6 +3,7 @@ window.addEventListener('load', function() {
     loadForm(formId);
     if (document.getElementById('weibo-panel') != null) {
         loadWeibo();
+        countChar();
     }
 });
 
@@ -150,4 +151,20 @@ function loadWeibo() {
     }
     xmlhttp.open("GET", url);
     xmlhttp.send();
+}
+
+function countChar() {
+    document.getElementById('edit-textarea').addEventListener('input', function() {
+        var number = this.value.length;
+        if (140 - number > 0) {
+            document.getElementById('edit-number').innerHTML = 140 - number;
+        } else {
+        	document.getElementById('edit-number-info').innerHTML = '已超出';
+        	document.getElementById('edit-number').style.color = 'red';
+            document.getElementById('edit-number').innerHTML = number - 140;
+        }
+    });
+    document.getElementById('edit-reset').addEventListener('click',function(){
+    	document.getElementById('edit-number').innerHTML = 140;
+    });
 }
