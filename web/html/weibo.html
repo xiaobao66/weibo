@@ -26,9 +26,10 @@
                     </div>
                 </div>
                 <form action="/submit" method="post" class="edit-form" id="edit-form">
-                    <textarea name="weibo" class="edit-textarea" id="edit-textarea"></textarea>
+                    <input type="hidden" name="username" id="edit-username">
+                    <textarea name="myweibo" class="edit-textarea" id="edit-textarea"></textarea>
                     <p class="edit-button">
-                        <input type="submit" name="edit" value="发布" class="form-button edit-confirm">
+                        <input type="submit" name="edit" value="发布" class="form-button edit-confirm" id="edit-confirm">
                         <input type="reset" value="取消" class="form-button" id="edit-reset">
                     </p>
                 </form>

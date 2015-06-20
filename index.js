@@ -10,5 +10,6 @@ handler['/login'] = requestHandlers.login;
 handler['/register'] = requestHandlers.register;
 handler['/user'] = requestHandlers.weibo;
 handler['/delete'] = requestHandlers.deleteWeibo;
+handler['/submit'] = requestHandlers.submitWeibo;
 
 server.start(router.router, handler);

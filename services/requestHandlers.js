@@ -209,8 +209,43 @@ function deleteWeibo(response, fileType, pathname, getData) {
 
 }
 
+function submitWeibo(response, fileType, pathname, postData) {
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        port: '3306',
+        user: 'root',
+        password: 'root',
+        database: 'weibo'
+    });
+    connection.connect();
+    console.log(postData);
+    var sql = "select * from user where username='" + postData['username'] + "'";
+    var article = postData['myweibo'];
+    connection.query(sql, function(err, results, fields) {
+        if (err) {
+            return;
+        } else {
+            postData = results[0].id;
+            sql = "insert into weibo (userid,article) values ('" + postData + "','" + article + "')";
+            console.log(sql);
+            connection.query(sql, function(err, results, fields) {
+                if (err) {
+                    return;
+                } else {
+                    response.writeHead(200, {
+                        'Content-type': 'text/plain'
+                    });
+                    response.write('submit success');
+                    response.end();
+                }
+            });
+        }
+    });
+}
+
 exports.loadFile = loadFile;
 exports.login = login;
 exports.register = register;
 exports.weibo = weibo;
 exports.deleteWeibo = deleteWeibo;
+exports.submitWeibo = submitWeibo;

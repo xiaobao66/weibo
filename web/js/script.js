@@ -41,6 +41,9 @@ function loadForm(formId) {
                 if (flag) {
                     sendData(form, '/register');
                 }
+                break;
+            case 'edit-form':
+                sendData(form, '/submit');
         }
     });
     if (form.id == 'register-form') {
@@ -91,10 +94,16 @@ function sendData(form, url) {
                 case 'insert success':
                     var username = document.getElementById('username').value;
                     window.location.href = '/weibo.html?' + username;
+                case 'submit success':
+                	location.reload();
             }
         }
     }
-    xmlhttp.open("POST", url);
+    if (url == '/submit') {
+        xmlhttp.open("POST", url, true);
+    } else {
+        xmlhttp.open("POST", url);
+    }
     xmlhttp.send(fd);
 }
 
@@ -105,6 +114,7 @@ function loadWeibo() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById('edit-username').value = nowUrl.split('?')[1];
             switch (xmlhttp.responseText) {
                 case 'no article':
                     break;
@@ -159,12 +169,14 @@ function countChar() {
         if (140 - number > 0) {
             document.getElementById('edit-number').innerHTML = 140 - number;
         } else {
-        	document.getElementById('edit-number-info').innerHTML = '已超出';
-        	document.getElementById('edit-number').style.color = 'red';
+            document.getElementById('edit-number-info').innerHTML = '已超出';
+            document.getElementById('edit-confirm').disabled = true;
+            document.getElementById('edit-confirm').style.opacity = 0.5;
+            document.getElementById('edit-number').style.color = 'red';
             document.getElementById('edit-number').innerHTML = number - 140;
         }
     });
-    document.getElementById('edit-reset').addEventListener('click',function(){
-    	document.getElementById('edit-number').innerHTML = 140;
+    document.getElementById('edit-reset').addEventListener('click', function() {
+        document.getElementById('edit-number').innerHTML = 140;
     });
 }
