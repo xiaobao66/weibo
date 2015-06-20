@@ -94,6 +94,7 @@ function sendData(form, url) {
                 case 'insert success':
                     var username = document.getElementById('username').value;
                     window.location.href = '/weibo.html?' + username;
+                    break;
                 case 'submit success':
                 	location.reload();
             }
@@ -115,6 +116,7 @@ function loadWeibo() {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById('edit-username').value = nowUrl.split('?')[1];
+            document.getElementById('weibo-username').innerHTML = nowUrl.split('?')[1];
             switch (xmlhttp.responseText) {
                 case 'no article':
                     break;

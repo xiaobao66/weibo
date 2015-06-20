@@ -133,7 +133,6 @@ function register(response, fileType, pathname, postData) {
             response.write('user exist');
             response.end();
         }
-        connection.end();
     });
 }
 
@@ -218,7 +217,6 @@ function submitWeibo(response, fileType, pathname, postData) {
         database: 'weibo'
     });
     connection.connect();
-    console.log(postData);
     var sql = "select * from user where username='" + postData['username'] + "'";
     var article = postData['myweibo'];
     connection.query(sql, function(err, results, fields) {
@@ -227,7 +225,6 @@ function submitWeibo(response, fileType, pathname, postData) {
         } else {
             postData = results[0].id;
             sql = "insert into weibo (userid,article) values ('" + postData + "','" + article + "')";
-            console.log(sql);
             connection.query(sql, function(err, results, fields) {
                 if (err) {
                     return;

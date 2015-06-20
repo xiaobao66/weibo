@@ -15,6 +15,7 @@ body {
     box-shadow: 0 1px 1px #c6c6c6;
     padding: 10px 0;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .header h1 {
@@ -205,4 +206,20 @@ body {
     padding: 20px 0;
     text-align: right;
     font-family: Constantia, Georgia;
+}
+
+.quit-log {
+    color: #000;
+    text-decoration: none;
+}
+
+.weibo-user {
+    position: absolute;
+    left: 50%;
+    margin-left: 150px;
+    top: 50%;
+}
+
+#weibo-username {
+    margin-right: 10px;
 }
