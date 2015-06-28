@@ -3,10 +3,11 @@ var fs = require('fs');
 var mysql = require('mysql');
 
 function loadFile(response, fileType, pathname) {
+    //根据文件类型，做出相应的响应
     switch (fileType) {
         case 'css':
             fs.readFile("./web/css/" + pathname, "utf-8", function(err, data) {
-                //读取文件内容
+                //加载css文件
                 if (err) throw err;
                 response.writeHead(200, {
                     'Content-type': 'text/css'
@@ -17,7 +18,7 @@ function loadFile(response, fileType, pathname) {
             break;
         case 'js':
             fs.readFile("./web/js/" + pathname, "utf-8", function(err, data) {
-                //读取文件内容
+                //加载js文件
                 if (err) throw err;
                 response.writeHead(200, {
                     'Content-type': 'application/javascript'
@@ -28,6 +29,7 @@ function loadFile(response, fileType, pathname) {
             break;
         case 'html':
             fs.readFile("./web/html/" + pathname, "utf-8", function(err, data) {
+                //加载html文件
                 if (err) throw err;
                 response.writeHead(200, {
                     'Content-type': 'text/html;charset="utf-8"'
@@ -49,6 +51,8 @@ function loadFile(response, fileType, pathname) {
 }
 
 function login(response, fileType, pathname, postData) {
+    //登录处理函数。
+    //根据postData，处理登录请求
     var connection = mysql.createConnection({
         host: 'localhost',
         port: '3306',
@@ -68,18 +72,21 @@ function login(response, fileType, pathname, postData) {
                 response.write('error');
                 response.end();
             } else if (results.length == 0) {
+                //用户不存在
                 response.writeHead(200, {
                     'Content-type': 'text/plain'
                 });
                 response.write('no user');
                 response.end();
             } else if (results[0].password != postData.password) {
+                //登录密码错误
                 response.writeHead(200, {
                     'Content-type': 'text/plain'
                 });
                 response.write('password error');
                 response.end();
             } else {
+                //登录成功
                 response.writeHead(200, {
                     'Content-type': 'text/plain'
                 });
@@ -99,6 +106,7 @@ function login(response, fileType, pathname, postData) {
 }
 
 function register(response, fileType, pathname, postData) {
+    //注册处理函数
     var connection = mysql.createConnection({
         host: 'localhost',
         port: '3306',
@@ -110,6 +118,7 @@ function register(response, fileType, pathname, postData) {
     var sql = "select * from user where username='" + postData.username + "'";
     connection.query(sql, function(err, results, fields) {
         if (results.length == 0) {
+            //用户不存在，进行注册操作
             sql = "insert into user (username,name,sex,password) values('" + postData.username + "','" + postData.wholename + "','" + postData.sex + "','" + postData.password + "')";
             connection.query(sql, function(err, results, fields) {
                 if (err) {
@@ -127,6 +136,7 @@ function register(response, fileType, pathname, postData) {
                 }
             });
         } else {
+            //用户已存在
             response.writeHead(200, {
                 'Content-type': 'text/plain'
             });
@@ -137,6 +147,7 @@ function register(response, fileType, pathname, postData) {
 }
 
 function weibo(response, fileType, pathname, getData) {
+    //返回用户已发微博数据
     var connection = mysql.createConnection({
         host: 'localhost',
         port: '3306',
@@ -181,6 +192,7 @@ function weibo(response, fileType, pathname, getData) {
 }
 
 function deleteWeibo(response, fileType, pathname, getData) {
+    //删除微博处理函数
     var connection = mysql.createConnection({
         host: 'localhost',
         port: '3306',
@@ -209,6 +221,7 @@ function deleteWeibo(response, fileType, pathname, getData) {
 }
 
 function submitWeibo(response, fileType, pathname, postData) {
+    //发布微博处理函数
     var connection = mysql.createConnection({
         host: 'localhost',
         port: '3306',
